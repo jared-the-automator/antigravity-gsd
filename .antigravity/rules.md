@@ -13,33 +13,26 @@ When user says `/gsd start` or asks to start a project:
 
 ### Execution Phase (The Loop)
 **Trigger**: User approves Roadmap or says `/gsd execute`.
-**Action**:
+**Protocol**:
 1.  **Load Context**: Read `ROADMAP.md`, `STATE.md`.
 2.  **Pick Task**: Identify the next `[ ]` item.
 3.  **Build**:
     -   Implement features.
     -   **Mock & Move**: If blocked by keys/auth, mock it and log in `STATE.md`.
     -   **Self-Correct**: Attempt to fix build failures up to 3 times.
-4.  **Verify (Crucial)**:
+4.  **Verify & Checkpoint**:
     -   Run tests/build.
-    -   **STOP and Report**: Show the user the result (Video/Test Output).
-    -   Ask: "Task Complete. Mark as [x] and move to next?"
+    -   **Update STATE.md**: Log the completed task and current status immediately.
+    -   **Report**: Show result to user.
+    -   **Ask**: "Task Complete. Continue?"
 
-### Context & Handover Strategy
-**Goal**: Maximize continuity. Only reset when necessary.
+### Context Management (User-Led)
+**Agent Responsibility**:
+-   **Never Stop Early**: Do not guess about token limits. work until the user says stop.
+-   **Always Be Saving**: Ensure `STATE.md` is perfect after every task so the user can reset anytime.
 
-**When to Continue**:
--   Ideally, keep working in the same chat for multiple tasks.
--   Do NOT reset just because a Phase is done, unless the chat feels "heavy" or slow.
-
-**When to Reset (Handover)**:
-1.  **Performance Degradation**: If you start making syntax errors or forgetting Rules.
-2.  **Major Context Shift**: Moving from a huge Frontend phase to a complex Backend phase.
-
-**Handover Protocol**:
-1.  Update `.planning/STATE.md` with current status and next tasks.
-2.  Generate a **"Next Session Prompt"** for the user.
-3.  Say: "Context is heavy. Please copy the prompt below and start a new chat."
+**User Trigger**:
+-   If the user says "Reset", "Handover", or starts a new chat, output the **Handover Prompt**.
 
 ## Tech Stack Standards
 Frontend: Tailwind CSS, React/Next.js.
