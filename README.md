@@ -1,59 +1,64 @@
-# Antigravity Adaptive Context Strategy
+# Antigravity: Turn-Based GSD Protocol
 
-A practical methodology for AI-assisted software development that solves the "context rot" problem in long-running LLM coding sessions.
+A disciplined methodology for autonomous software development in "Turn-Based" AI environments (like Antigravity, Cursor, or Windsurf).
 
-## 🛑 The Problem
+## 🛑 The Problem: "The Loop Trap"
 
-We all know about massive context windows (2M+ tokens), but nobody talks about when to **STOP** using them.
+Most "Agentic" workflows try to force a Chat-based AI to behave like a CLI loop (running commands infinitely). In VS Code environments, this fails because:
+1.  **Context Rot**: Long sessions degrade reasoning quality.
+2.  **Turn Limits**: The system eventually forces a stop.
+3.  **Loss of State**: When the agent eventually crashes or hallucinates, you lose track of "What was it doing exactly?"
 
-After extensive testing (including a documented 115K+ token coding session), we discovered that:
-1.  **Peak Performance (0-30K tokens):** The agent is sharp, creative, and handles complex multi-file refactoring with ease.
-2.  **Degradation (50K+ tokens):** Quality drops noticeably. The agent gets "lost in the middle," forgets recent instructions, or enters repetitive loops.
-3.  **Failure Zone (60K+ tokens):** The cost (time/money) of correcting errors exceeds the benefit of the large context.
+## 💡 The Solution: Turn-Based GSD
 
-## 💡 The Solution: Adaptive Context Limits
+Instead of pretending to be infinite, we embrace the constraints. We treat development like a **Turn-Based Strategy Game** with strict **Save Points**.
 
-Instead of one continuous session, we implement strict, evidence-based limits:
+### 1. The "Save Game" Mechanic (`STATE.md`)
+We decouple the project state from the Chat Context.
+-   **Chat Context**: Ephemeral, prone to rotting.
+-   **File System (`.planning/`)**: Permanent, infinite.
 
--   **🟢 0-30K Tokens (Green Zone):**
-    -   Perform complex reasoning, architecture planning, and heavy refactoring.
-    -   *Action:* Full speed ahead.
+After **EVERY** task, the Agent must update `STATE.md`. This means you can crash the chat window, start a new one, and resume instantly with zero context loss.
 
--   **🟡 30-50K Tokens (Yellow Zone):**
-    -   Good for iterating, debugging, and polishing.
-    -   *Action:* Finish up current tasks. Start documenting learnings.
+### 2. The Protocol
 
--   **🟠 50K Tokens (Checkpoint Zone):**
-    -   The "danger zone" approaches.
-    -   *Action:* **MANDATORY CHECKPOINT.** Update your `STATE.md` (persistent memory) with all recent changes, decisions, and next steps.
+#### Phase 0: The Interview (Planning)
+Before writing code, the Agent must "Interview" the project.
+-   **Brain Dump**: Vision & Value.
+-   **Rule Dump**: Constraints & Naming.
+-   **Outcome**: A committed `.planning/ROADMAP.md`.
 
--   **🔴 60K Tokens (Red Zone):**
-    -   *Action:* **HARD RESET.** Stop the session. Start a fresh conversation feeding in `PROJECT.md`, `ROADMAP.md`, and the updated `STATE.md`.
+#### Phase 1: The Turn-Based Loop
+The Agent enters "Autonomous Mode" but respects the Turn structure:
+1.  **Load State**: Read `STATE.md`.
+2.  **Execute**: Build *one* task.
+3.  **Verify**: Run tests/scripts.
+4.  **Save Game**: Update `STATE.md` with the result.
+5.  **Status Check**: Output a token/vibe estimate.
+6.  **Yield**: "Task Complete. Continue?"
 
-## 🛠️ Implementation
+#### Phase 2: The Handover
+When the context gets "heavy" (or the user decides to reset):
+1.  User says "Reset".
+2.  Agent generates a **Handover Prompt** summarizing the exact state.
+3.  User pastes prompt into New Chat.
+4.  Development resumes instantly.
 
-### 1. The Rules File
-Copy the contents of `.antigravity/rules.md` to your agent's system prompt or custom instructions. This teaches the agent to monitor its own context and respect the GSD (Get Shit Done) workflow.
+## 🛠️ Usage
 
-### 2. The GSD Workflow
-We use a lightweight state management system to bridge sessions:
--   `PROJECT.md`: Vision and constraints (Static)
--   `ROADMAP.md`: Tasks and completion status (Dynamic)
--   `STATE.md`: The "Brain" - persistent context passed between sessions.
+1.  **Install**: Copy the `.antigravity` folder to your workspace.
+2.  **Start**: Open a chat and say:
+    ```
+    Read .antigravity/rules.md
+    /gsd start
+    ```
+3.  **Hand over control**: Let the Agent interview you, then watch it execute the roadmap task-by-task.
 
-### 3. Workflow File
-See `workflows/ralph-gsd.md` for the specific orchestrator prompt we use to drive this loop.
+## 📂 Repository Structure
 
-## 📊 Results
-Using this strategy on "Project Ecliptic" (a Chrome Extension):
--   **Before:** 115K token session, stuck in build configuration loops for 45 mins.
--   **After:** Fresh session resolved the issue in <10 mins using clean context.
--   **Impact:** Reduced debugging time by ~60% and token costs by ~40%.
-
-## 🚀 Usage
-1.  Clone this repo.
-2.  Add the `.antigravity` folder to your project root.
-3.  Instruct your AI assistant: *"Follow the rules in .antigravity/rules.md"*.
+-   `.antigravity/rules.md`: The "System Prompt Injection" that enforces the protocol.
+-   `workflows/turn-based-gsd.md`: The step-by-step logic for the Agent to follow.
 
 ---
-*Created by [Your Name/Handle]*
+
+*Designed for the next generation of IDE-integrated Agents.*
