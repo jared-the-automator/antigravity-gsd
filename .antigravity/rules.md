@@ -24,7 +24,11 @@ When user says `/gsd start` or asks to start a project:
     -   Run tests/build.
     -   **Update STATE.md**: Log the completed task and current status immediately.
     -   **Report**: Show result to user.
-    -   **Ask**: "Task Complete. Continue?"
+    -   **Status Footer**: You MUST end your turn with:
+        > **Status**: [Current Phase/Task]
+        > **Est. Tokens**: [Your best guess, e.g., low/medium/high or ~15k]
+        > **Vibe Check**: [Stable/Degrading]
+        > **Next Action**: [Next Task]
 
 ### Context Management (User-Led)
 **Agent Responsibility**:
