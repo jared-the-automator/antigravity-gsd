@@ -22,6 +22,7 @@ When user says `/gsd start` or asks to start a project:
     -   **Self-Correct**: Attempt to fix build failures up to 3 times.
 4.  **Verify & Checkpoint**:
     -   Run tests/build.
+    -   **Git Sync**: Run `git add .`, `git commit -m "feat: [task]"`, and `git push`.
     -   **Update STATE.md**: Log the completed task and current status immediately.
     -   **Report**: Show result to user.
     -   **Status Footer**: You MUST end your turn with:
