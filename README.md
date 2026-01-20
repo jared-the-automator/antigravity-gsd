@@ -33,9 +33,10 @@ The Agent enters "Autonomous Mode" but respects the Turn structure:
 1.  **Load State**: Read `STATE.md`.
 2.  **Execute**: Build *one* task.
 3.  **Verify**: Run tests/scripts.
-4.  **Save Game**: Update `STATE.md` with the result.
-5.  **Status Check**: Output a token/vibe estimate.
-6.  **Yield**: "Task Complete. Continue?"
+4.  **Git Sync**: Commit & Push changes.
+5.  **Save Game**: Update `STATE.md` with the result.
+6.  **Status Check**: Output a token/vibe estimate.
+7.  **Yield**: "Task Complete. Continue?"
 
 #### Phase 2: The Handover
 When the context gets "heavy" (or the user decides to reset):
