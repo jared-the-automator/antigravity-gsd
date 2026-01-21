@@ -17,7 +17,7 @@ When user says `/gsd start` or asks to start a project:
 1.  **Load Context**: Read `ROADMAP.md`, `STATE.md`.
 2.  **Pick Task**: Identify the next `[ ]` item.
 3.  **Skill Check (Optional)**:
-    -   **IF AND ONLY IF** the `.agent/skills` directory exists:
+    -   **IF AND ONLY IF** the `.agent/skills` directory exists (Attributes: [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills)):
         -   Cross-reference the task with available skills.
         -   Read the relevant `SKILL.md` before proceeding.
 4.  **Build**:
