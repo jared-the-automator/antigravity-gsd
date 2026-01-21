@@ -16,14 +16,15 @@ When user says `/gsd start` or asks to start a project:
 **Protocol**:
 1.  **Load Context**: Read `ROADMAP.md`, `STATE.md`.
 2.  **Pick Task**: Identify the next `[ ]` item.
-3.  **Skill Check**:
-    -   Cross-reference the task with available skills in `.agent/skills`.
-    -   If a relevant skill exists (e.g. `react`, `docker`), READ its `SKILL.md` before proceeding.
+3.  **Skill Check (Optional)**:
+    -   **IF AND ONLY IF** the `.agent/skills` directory exists:
+        -   Cross-reference the task with available skills.
+        -   Read the relevant `SKILL.md` before proceeding.
 4.  **Build**:
     -   Implement features.
     -   **Mock & Move**: If blocked by keys/auth, mock it and log in `STATE.md`.
     -   **Self-Correct**: Attempt to fix build failures up to 3 times.
-4.  **Verify & Checkpoint**:
+5.  **Verify & Checkpoint**:
     -   Run tests/build.
     -   **Git Sync**: Run `git add .`, `git commit -m "feat: [task]"`, and `git push`.
     -   **Update STATE.md**: Log the completed task and current status immediately.
