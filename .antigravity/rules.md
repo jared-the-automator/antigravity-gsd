@@ -35,13 +35,30 @@ When user says `/gsd start` or asks to start a project:
         > **Vibe Check**: [Stable/Degrading]
         > **Next Action**: [Next Task]
 
-### Context Management (User-Led)
+### Context Management & Handover
 **Agent Responsibility**:
--   **Never Stop Early**: Do not guess about token limits. work until the user says stop.
--   **Always Be Saving**: Ensure `STATE.md` is perfect after every task so the user can reset anytime.
+-   **Always Be Saving**: Ensure `.planning/STATE.md` is updated after every task.
+-   **Handover Protocol**: If the user says "Reset", "Handover", or you reach a major milestone, you MUST generate a **Handover Prompt**.
 
-**User Trigger**:
--   If the user says "Reset", "Handover", or starts a new chat, output the **Handover Prompt**.
+#### The Handover Prompt Template
+When generating a handover, you MUST use this structure:
+```markdown
+# GSD HANDOVER: [Project Name]
+
+## 🚨 BOOT SEQUENCE (MANDATORY)
+1. Read `.antigravity/rules.md` (Internalize the Turn-Based GSD Protocol).
+2. Read `.planning/STATE.md` (Current task and blockers).
+3. Read `.planning/ROADMAP.md` (The master plan).
+4. Verify local tools (`ls`, `git --version`).
+
+## 📊 CURRENT STATE
+[Copy/Paste latest from STATE.md]
+
+## 🛠 NEXT ACTION
+[Specific task to execute once rules are internalized]
+```
+
+**Instruction to User**: "Copy the text below into a New Chat to resume development with full context and the GSD protocol active."
 
 ## Tech Stack Standards
 Frontend: Tailwind CSS, React/Next.js.

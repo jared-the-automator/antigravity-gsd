@@ -2,12 +2,12 @@
 
 A disciplined methodology for autonomous software development in "Turn-Based" AI environments (like Antigravity, Cursor, or Windsurf).
 
-## 🛑 The Problem: "The Loop Trap"
+## 🛑 The Problem: "The Loop Trap" & Amnesia
 
 Most "Agentic" workflows try to force a Chat-based AI to behave like a CLI loop (running commands infinitely). In VS Code environments, this fails because:
 1.  **Context Rot**: Long sessions degrade reasoning quality.
 2.  **Turn Limits**: The system eventually forces a stop.
-3.  **Loss of State**: When the agent eventually crashes or hallucinates, you lose track of "What was it doing exactly?"
+3.  **The Amnesia Gap**: When starting a new chat, the Agent has no idea what happened in the last one, leading to repetitive work or missed requirements.
 
 ## 💡 The Solution: Turn-Based GSD
 
@@ -20,46 +20,34 @@ We decouple the project state from the Chat Context.
 
 After **EVERY** task, the Agent must update `STATE.md`. This means you can crash the chat window, start a new one, and resume instantly with zero context loss.
 
-### 2. The Protocol
-
-#### Phase 0: The Interview (Planning)
-Before writing code, the Agent must "Interview" the project.
--   **Brain Dump**: Vision & Value.
--   **Rule Dump**: Constraints & Naming.
--   **Outcome**: A committed `.planning/ROADMAP.md`.
-
-#### Phase 1: The Turn-Based Loop
-The Agent enters "Autonomous Mode" but respects the Turn structure:
-1.  **Load State**: Read `STATE.md`.
-2.  **Execute**: Build *one* task.
-3.  **Verify**: Run tests/scripts.
-4.  **Git Sync**: Commit & Push changes.
-5.  **Save Game**: Update `STATE.md` with the result.
-6.  **Status Check**: Output a token/vibe estimate.
-7.  **Yield**: "Task Complete. Continue?"
-
-#### Phase 2: The Handover
-When the context gets "heavy" (or the user decides to reset):
-1.  User says "Reset".
-2.  Agent generates a **Handover Prompt** summarizing the exact state.
-3.  User pastes prompt into New Chat.
-4.  Development resumes instantly.
-
-## 🛠️ Usage
-
-1.  **Install**: Copy the `.antigravity` folder to your workspace.
-2.  **Start**: Open a chat and say:
-    ```
-    Read .antigravity/rules.md
-    /gsd start
-    ```
-3.  **Hand over control**: Let the Agent interview you, then watch it execute the roadmap task-by-task.
-
-## 📂 Repository Structure
-
--   `.antigravity/rules.md`: The "System Prompt Injection" that enforces the protocol.
--   `workflows/turn-based-gsd.md`: The step-by-step logic for the Agent to follow.
+### 2. The GSD Boot Sequence (Fixing Amnesia)
+When starting a new session, you don't just "talk" to the Agent. You **Boot** it.
+The `/gsd-boot` command (found in `.agent/workflows`) forces the Agent to internalize the rules, history, and roadmap before writing a single line of code.
 
 ---
 
-*Designed for the next generation of IDE-integrated Agents.*
+## 🛠️ Usage
+
+### 1. New Project Setup
+1.  Copy the `.antigravity` folder and `workflows` to your workspace.
+2.  In a chat, say: `/gsd start`.
+3.  The Agent will interview you to build the Roadmap.
+
+### 2. Resuming a Session (The Boot)
+If you start a new chat or the context feels "heavy", say:
+```
+/gsd-boot
+```
+This forces the Agent to read `rules.md`, `STATE.md`, and `ROADMAP.md` immediately.
+
+---
+
+## 📂 Repository Structure
+
+-   `.antigravity/rules.md`: The "Brains". The rules that govern how the Agent behaves.
+-   `.agent/workflows/`: Standard Operating Procedures (SOPs) for the Agent.
+-   `.planning/`: Where your project identity and history live.
+
+---
+
+*Designed for the next generation of IDE-integrated Agents (v2.0).*
