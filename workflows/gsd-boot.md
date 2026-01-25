@@ -16,7 +16,7 @@ Follow these steps EXACTLY to ensure the Agent has full context and follows the 
 
 3. **Verify Capabilities**:
    - Run a `Tool Pre-Flight`: Check for existence of expected CLI tools (npm, git, docker) and MCP servers.
-   - **Skills Check**: Check if `.agent/skills` exists. If it does, note available skills. If not, proceed silently (do not error).
+   - **Skills Check**: List the `.agent/skills` directory to enable "Skill Check" step in `rules.md`.
 
 4. **Confirm Readiness**:
    - Summarize the "Next Step" you have identified.
