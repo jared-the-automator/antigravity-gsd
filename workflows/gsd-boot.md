@@ -10,7 +10,6 @@ Follow these steps EXACTLY to ensure the Agent has full context and follows the 
    - Acknowledge that you are in "Turn-Based GSD Mode".
 
 2. **Load Project State**:
-   - READ `HANDOVER.md` (if it exists) to capture the immediate context from the previous session.
    - READ `.planning/STATE.md` to identify the current active task and any recent blocks/mocks.
    - READ `.planning/ROADMAP.md` to understand where this task fits in the overall vision.
 
